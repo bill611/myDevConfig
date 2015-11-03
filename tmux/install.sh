@@ -16,3 +16,7 @@ else
 	exit 1
 fi
 
+if [ -e clean_history.sh ] ; then 
+	echo "cp clean_history.sh ~/.tmux_history/ "
+	cp clean_history.sh ~/.tmux_history/
+fi

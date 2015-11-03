@@ -4,46 +4,6 @@
 
 priority -50
 
-# .c add head files
-snippet chead "add .c files head description" b
-/*
- * =====================================================================================
- *
- *       Filename:  `!v fnamemodify(bufname("%"),":t") `
- *
- *    Description:  ${1:description}
- *
- *        Version:  ${2:virsion}
- *        Created:  `echo $(date +%Y-%m-%d\ %H:%M:%S)`
- *       Revision:  ${3:none}
- *
- *         Author:  xubin
- *        Company:  Taichuan
- *
- * =====================================================================================
- */
-/* ----------------------------------------------------------------*
- *                      include head files
- *-----------------------------------------------------------------*/
-
-/* ----------------------------------------------------------------*
- *                  extern variables declare
- *-----------------------------------------------------------------*/
-
-/* ----------------------------------------------------------------*
- *                  internal functions declare
- *-----------------------------------------------------------------*/
-
-/* ----------------------------------------------------------------*
- *                        macro define
- *-----------------------------------------------------------------*/
-
-/* ----------------------------------------------------------------*
- *                      variables define
- *-----------------------------------------------------------------*/
-${0}
-endsnippet
-
 # 创建minigui新窗口模板
 snippet minigui_form "Creat Minigui Form" b
 /*
@@ -200,4 +160,15 @@ int Create${5}Form(HWND hMainWnd,BITMAP *Bmp_bkg)
 ${0}
 endsnippet
 
+snippet xywh "define X_* Y_* W_* H_* for controls location" b
+#define W_${1:SIMBLE}
+#define H_$1	
+#define X_$1
+#define Y_$1
+
+endsnippet
+
+snippet cctrl "X_*,Y_*,W_*,H_*,for creat controls" b
+(X_${1},Y_$1,W_$1,H_$1,);
+endsnippet
 # vim:ft=snippets:
