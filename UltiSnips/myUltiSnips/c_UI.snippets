@@ -103,38 +103,38 @@ static void ProUserKeyBoard(HWND hWnd,int KeyVal)
  * @return
  */
 /* ----------------------------------------------------------------*/
-static int $5Proc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
+static int $5Proc(HWND hDlg, int message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message)
 	{
 		case MSG_INITDIALOG:
 			{
-				Screen.Add(hWnd,"TFrm$6");
+				Screen.Add(hDlg,"TFrm$6");
 			} break;
 
 		case MSG_KEYBOARD :
-			ProUserKeyBoard(hWnd,wParam);
+			ProUserKeyBoard(hDlg,wParam);
 			break;
 
 		case MSG_ERASEBKGND:
 			if (Bmp_background != NULL)
-				DrawBackground(hWnd, (HDC)wParam, (const RECT*)lParam,Bmp_background);
+				DrawBackground(hDlg, (HDC)wParam, (const RECT*)lParam,Bmp_background);
 			return 0;
 
 		case MSG_CLOSE:
-			DestroyMainWindow (hWnd);
-			MainWindowThreadCleanup (hWnd);
+			DestroyMainWindow (hDlg);
+			MainWindowThreadCleanup (hDlg);
 			return 0;
 
 		case MSG_DESTROY:
-			Screen.Del(hWnd);
-			DestroyAllControls (hWnd);
+			Screen.Del(hDlg);
+			DestroyAllControls (hDlg);
 			return 0;
 
 		default:
 			break;
 	}
-    return DefaultDialogProc(hWnd, message, wParam, lParam);
+    return DefaultDialogProc(hDlg, message, wParam, lParam);
 }
 
 /* ----------------------------------------------------------------*/
