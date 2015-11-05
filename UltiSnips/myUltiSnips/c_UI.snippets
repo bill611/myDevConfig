@@ -95,7 +95,7 @@ static void ProUserKeyBoard(HWND hWnd,int KeyVal)
 /**
  * @brief $5Proc 窗口回调函数
  *
- * @param hWnd
+ * @param hDlg
  * @param message
  * @param wParam
  * @param lParam
@@ -162,13 +162,13 @@ endsnippet
 
 snippet xywh "define X_* Y_* W_* H_* for controls location" b
 #define W_${1:SIMBLE}
-#define H_$1	
+#define H_$1
 #define X_$1
 #define Y_$1
 
 endsnippet
 
 snippet cctrl "X_*,Y_*,W_*,H_*,for creat controls" b
-(X_${1},Y_$1,W_$1,H_$1,);
+(X_${1},Y_$1,W_$1,H_$1,),
 endsnippet
 # vim:ft=snippets:
