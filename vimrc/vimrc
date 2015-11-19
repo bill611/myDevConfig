@@ -340,7 +340,8 @@ au! BufRead,BufNewFile,BufEnter *.{c,cpp,h,java,javascript} call CSyntaxAfter()
 " 常规模式下输入：Ctrl + p 调用插件
  
 " 忽略.o等文件
-let g:ctrlp_custom_ignore = '\v\.(so|a|la|o|out)$'
+set wildignore+=Makefile        " Linux/MacOSX
+let g:ctrlp_custom_ignore = '\v\.(so|a|la|o|out|in)$'
 " -----------------------------------------------------------------------------
 "  < emmet-vim（前身为Zen coding） 插件配置 >
 " -----------------------------------------------------------------------------
