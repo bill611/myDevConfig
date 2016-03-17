@@ -20,3 +20,5 @@ if [ -e clean_history.sh ] ; then
 	echo "cp clean_history.sh ~/.vimrc_history/ "
 	cp clean_history.sh ~/.vimrc_history/
 fi
+
+./install_plugs.sh

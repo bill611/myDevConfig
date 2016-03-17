@@ -2,6 +2,13 @@
 
 TIME=`date +%Y%m%d_%H_%M_%S`
 
+tmux --help > /dev/null 2>&1
+if [ ! $? = 0 ] ; then
+	echo "tmux didn't install"
+	echo "install tmux "
+	sudo apt-get install tmux
+fi
+
 if [ -e ~/.tmux.conf ] ;then
 	mkdir -p ~/.tmux_history
 	echo "mv ~/.tmux ~/.tmux_history/tmux_bak_$TIME"
