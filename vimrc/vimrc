@@ -130,34 +130,23 @@ Bundle 'gmarik/vundle'
 
 " 以下为要安装或更新的插件，不同仓库都有（具体书写规范请参考帮助）
 Bundle 'a.vim'
-" Bundle 'c.vim'
 Bundle 'Align'
 Bundle 'jiangmiao/auto-pairs'
 Bundle 'bufexplorer.zip'
 Bundle 'ccvext.vim'
 Bundle 'cSyntaxAfter'
 Bundle 'ctrlpvim/ctrlp.vim'
-" Bundle 'mattn/emmet-vim'
-Bundle 'Yggdroot/indentLine'
-" Bundle 'vim-javacompleteex'
 Bundle 'Mark--Karkat'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
-" Bundle 'OmniCppComplete'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'repeat.vim'
-" Bundle 'msanders/snipmate.vim'
-" Bundle 'wesleyche/SrcExpl'
 Bundle 'std_c.zip'
-" Bundle 'tpope/vim-surround'
-" Bundle 'scrooloose/syntastic'
 Bundle 'majutsushi/tagbar'
 Bundle 'taglist.vim'
 Bundle 'TxtBrowser'
 Bundle 'ZoomWin'
-Bundle 'WinManager'
 Bundle 'EasyGrep'
-"Bundle "fholgado/minibufexpl.vim"
 Bundle 'DoxygenToolkit.vim'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'changesPlugin'
@@ -383,11 +372,11 @@ let g:indentLine_color_term = 239
 " 快速浏览和操作Buffer
 " 主要用于同时打开多个文件并相与切换
 
-let g:miniBufExplMapWindowNavArrows = 1     "用Ctrl加方向键切换到上下左右的窗口中去
-let g:miniBufExplMapWindowNavVim = 1        "用<C-k,j,h,l>切换到上下左右的窗口中去
-let g:miniBufExplMapCTabSwitchBufs = 1      "功能增强（不过好像只有在Windows中才有用）
-let g:miniBufExplModSelTarget = 1
-let g:miniBufExplorerMoreThanOne = 0
+" let g:miniBufExplMapWindowNavArrows = 1     "用Ctrl加方向键切换到上下左右的窗口中去
+" let g:miniBufExplMapWindowNavVim = 1        "用<C-k,j,h,l>切换到上下左右的窗口中去
+" let g:miniBufExplMapCTabSwitchBufs = 1      "功能增强（不过好像只有在Windows中才有用）
+" let g:miniBufExplModSelTarget = 1
+" let g:miniBufExplorerMoreThanOne = 0
 
 "                                            <C-Tab> 向前循环切换到每个buffer上,并在但前窗口打开
 "                                            <C-S-Tab> 向后循环切换到每个buffer上,并在当前窗口打开
@@ -409,8 +398,8 @@ let g:neocomplcache_enable_at_startup = 1     "vim 启动时启用插件
 " -----------------------------------------------------------------------------
 "  < Supertab 插件配置 >
 " -----------------------------------------------------------------------------
-let g:SuperTabRetainCompletionType=2
-let g:SuperTabDefaultCompletionType="<C-X><C-N>"
+" let g:SuperTabRetainCompletionType=2
+" let g:SuperTabDefaultCompletionType="<C-X><C-N>"
 
 " -----------------------------------------------------------------------------
 "  < nerdcommenter 插件配置 >
@@ -444,7 +433,7 @@ let NERDTreeWinPos="right"
 " ctags -R --c++-kinds=+p --fields=+iaS --extra=+q
 " 我使用上面的参数生成标签后，对函数使用跳转时会出现多个选择
 " 所以我就将--c++-kinds=+p参数给去掉了，如果大侠有什么其它解决方法希望不要保留呀
-set completeopt=menu                        "关闭预览窗口
+" set completeopt=menu                        "关闭预览窗口
 
 " -----------------------------------------------------------------------------
 "  < powerline 插件配置 >
@@ -467,7 +456,7 @@ set completeopt=menu                        "关闭预览窗口
 "  < SrcExpl 插件配置 >
 " -----------------------------------------------------------------------------
 " 增强源代码浏览，其功能就像Windows中的"Source Insight"
-nmap <F3> :SrcExplToggle<CR>                "打开/闭浏览窗口
+" nmap <F3> :SrcExplToggle<CR>                "打开/闭浏览窗口
 
 " -----------------------------------------------------------------------------
 "  < std_c 插件配置 >
@@ -586,8 +575,8 @@ set tags+=~/tc3000/kernel/kernel_2.6.35/linux-2.6.35.4/include/tags
 " -----------------------------------------------------------------------------
 "let g:winManagerWindowLayout='FileExplorer|TagList'
 "nmap wm :WMToggle<CR>
-let g:winManagerWindowLayout='NERDTree'
-nmap wm :WMToggle<cr>:TlistToggle<cr>
+" let g:winManagerWindowLayout='NERDTree'
+" nmap wm :WMToggle<cr>:TlistToggle<cr>
 
 " -----------------------------------------------------------------------------
 "  < Easygrep 工具配置 >
@@ -607,44 +596,6 @@ let g:EasyGrepFilesToExclude = "*.bak, *~, cscope.*, *.a, *.o, *.pyc, *.bak"
 " 全屏后再隐藏菜单栏、工具栏、滚动条效果更好
 if (g:iswindows && g:isGUI)
 	nmap <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
-endif
-
-" -----------------------------------------------------------------------------
-"  < vimtweak 工具配置 > 请确保以已装了工具
-" -----------------------------------------------------------------------------
-" 这里只用于窗口透明与置顶
-" 常规模式下 Ctrl + Up（上方向键） 增加不透明度，Ctrl + Down（下方向键） 减少不透明度，<Leader>t 窗口置顶与否切换
-if (g:iswindows && g:isGUI)
-	let g:Current_Alpha = 255
-	let g:Top_Most = 0
-	func! Alpha_add()
-		let g:Current_Alpha = g:Current_Alpha + 10
-		if g:Current_Alpha > 255
-			let g:Current_Alpha = 255
-		endif
-		call libcallnr("vimtweak.dll","SetAlpha",g:Current_Alpha)
-	endfunc
-	func! Alpha_sub()
-		let g:Current_Alpha = g:Current_Alpha - 10
-		if g:Current_Alpha < 155
-			let g:Current_Alpha = 155
-		endif
-		call libcallnr("vimtweak.dll","SetAlpha",g:Current_Alpha)
-	endfunc
-	func! Top_window()
-		if  g:Top_Most == 0
-			call libcallnr("vimtweak.dll","EnableTopMost",1)
-			let g:Top_Most = 1
-		else
-			call libcallnr("vimtweak.dll","EnableTopMost",0)
-			let g:Top_Most = 0
-		endif
-	endfunc
-
-	"快捷键设置
-	nmap <c-up> :call Alpha_add()<CR>
-	nmap <c-down> :call Alpha_sub()<CR>
-	nmap <leader>t :call Top_window()<CR>
 endif
 
 " =============================================================================
@@ -700,8 +651,8 @@ end
 let g:DoxygenToolkit_briefTag_pre="@brief "
 let g:DoxygenToolkit_paramTag_pre="@param "
 let g:DoxygenToolkit_returnTag="@returns "
-let g:DoxygenToolkit_blockHeader="----------------------------------------------------------------"
-let g:DoxygenToolkit_blockFooter="----------------------------------------------------------------"
+let g:DoxygenToolkit_blockHeader="---------------------------------------------------------------------------"
+let g:DoxygenToolkit_blockFooter="---------------------------------------------------------------------------"
 let g:DoxygenToolkit_authorName="xubin"
 
 let g:DoxygenToolkit_briefTag_funcName="yes"
@@ -709,10 +660,10 @@ let g:doxygen_enhanced_color=1
 
 
 """""""""""调整窗口大小""""""""""""""""
-nmap    w=  :resize +3<CR>
-nmap    w-  :resize -3<CR>
-nmap    w.  :vertical resize -3<CR>
-nmap    w,  :vertical resize +3<CR>
+nmap    q=  :resize +3<CR>
+nmap    q-  :resize -3<CR>
+nmap    q.  :vertical resize -3<CR>
+nmap    q,  :vertical resize +3<CR>
 
 " YouCompleteMe config
 """""""""""YouCompleteMe""""""""""""""""

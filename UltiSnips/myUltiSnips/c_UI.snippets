@@ -2,12 +2,12 @@
 #                            TextMate Snippets                            #
 ###########################################################################
 
-priority -50
+priority -60
 
 # 创建minigui新窗口模板
 snippet minigui_form "Creat Minigui Form" b
 /*
- * =====================================================================================
+ * ============================================================================
  *
  *       Filename:  `!v fnamemodify(bufname("%"),":t") `
  *
@@ -20,39 +20,40 @@ snippet minigui_form "Creat Minigui Form" b
  *         Author:  xubin
  *        Company:  Taichuan
  *
- * =====================================================================================
+ * =============================================================================
  */
-/* ----------------------------------------------------------------*
+/* ---------------------------------------------------------------------------*
  *                      include head files
- *-----------------------------------------------------------------*/
+ *----------------------------------------------------------------------------*/
 
-#include <minigui/common.h>
-#include <minigui/minigui.h>
-#include <minigui/gdi.h>
-#include <minigui/window.h>
-#include <minigui/control.h>
+#include "FormBase.h"
 #include "`!v fnamemodify(bufname("%"),":r") `.h"
-/* ----------------------------------------------------------------*
+/* ---------------------------------------------------------------------------*
  *                  extern variables declare
- *-----------------------------------------------------------------*/
+ *----------------------------------------------------------------------------*/
 
-/* ----------------------------------------------------------------*
+/* ---------------------------------------------------------------------------*
  *                  internal functions declare
- *-----------------------------------------------------------------*/
+ *----------------------------------------------------------------------------*/
+static int form$6Proc(HWND hDlg, int message, WPARAM wParam, LPARAM lParam);
+static void keyboardNotify(HWND hwnd, int id, int nc, DWORD add_data);
+static void formInitCtrlLabers(HWND hDlg);
+static void formInitCtrlButtons(HWND hDlg);
+static void formInitCtrlEdits(HWND hDlg);
+static void formInitPara(HWND hDlg, int message, WPARAM wParam, LPARAM lParam);
 
-/* ----------------------------------------------------------------*
+/* ---------------------------------------------------------------------------*
  *                        macro define
- *-----------------------------------------------------------------*/
+ *----------------------------------------------------------------------------*/
 #if DBG_${4:none} > 0
 	#define DBG_P( x... ) printf( x )
 #else
 	#define DBG_P( x... )
 #endif
 
-/* ----------------------------------------------------------------*
+/* ---------------------------------------------------------------------------*
  *                      variables define
- *-----------------------------------------------------------------*/
-static BITMAP *Bmp_background = NULL; 
+ *----------------------------------------------------------------------------*/
 static MY_CTRLDATA ChildCtrls [] = {
 
 
@@ -71,29 +72,83 @@ static MY_DLGTEMPLATE DlgInitParam =
     0           //additional data,must be zero
 };
 
+static FormBasePriv form_base_priv= {
+	.name = "TFrm${5}",
+	.dlgProc = &form${6}Proc,
+	.dlgInitParam = &DlgInitParam,
 
-/* ----------------------------------------------------------------*/
+	.keyboardNotify = keyboardNotify ,
+	.initCtrlLabers =  formInitCtrlLabers,
+	.initCtrlButtons =  formInitCtrlButtons,
+	.initCtrlEdits =  formInitCtrlEdits,
+	.initPara =  formInitPara,
+};
+
+static FormBase* form_base;
+/* ---------------------------------------------------------------------------*/
 /**
- * @brief ProUserKeyBoard 处理按键键值
+ * @brief keyboardNotify 小键盘按键回调函数
  *
- * @param hWnd  主窗口句柄
- * @param KeyVal 键值
+ * @param hwnd
+ * @param id
+ * @param nc
+ * @param add_data 键值 0-11
  */
-/* ----------------------------------------------------------------*/
-static void ProUserKeyBoard(HWND hDlg,int KeyVal)
+/* ---------------------------------------------------------------------------*/
+static void keyboardNotify(HWND hwnd, int id, int nc, DWORD add_data)
 {
-	switch(KeyVal)
-	{
-		default:
-			{
-			} break;
-	}
 }
 
-
-/* ----------------------------------------------------------------*/
+/* ---------------------------------------------------------------------------*/
 /**
- * @brief $5Proc 窗口回调函数
+ * @brief formInitCtrlLabers 初始化Laber控件
+ *
+ * @param hDlg
+ */
+/* ---------------------------------------------------------------------------*/
+static void formInitCtrlLabers(HWND hDlg)
+{
+}
+
+/* ---------------------------------------------------------------------------*/
+/**
+ * @brief formInitCtrlEdits 初始化Edit控件
+ *
+ * @param hDlg
+ */
+/* ---------------------------------------------------------------------------*/
+static void formInitCtrlEdits(HWND hDlg)
+{
+}
+
+/* ---------------------------------------------------------------------------*/
+/**
+ * @brief formInitCtrlButtons 初始化button控件
+ *
+ * @param hDlg
+ */
+/* ---------------------------------------------------------------------------*/
+static void formInitCtrlButtons(HWND hDlg)
+{
+}
+
+/* ---------------------------------------------------------------------------*/
+/**
+ * @brief formInitPara 初始化编辑框
+ *
+ * @param hDlg
+ * @param message
+ * @param wParam
+ * @param lParam
+ */
+/* ---------------------------------------------------------------------------*/
+static void formInitPara(HWND hDlg, int message, WPARAM wParam, LPARAM lParam)
+{
+}
+
+/* ---------------------------------------------------------------------------*/
+/**
+ * @brief form$6Proc 窗口回调函数
  *
  * @param hDlg
  * @param message
@@ -102,60 +157,55 @@ static void ProUserKeyBoard(HWND hDlg,int KeyVal)
  *
  * @return
  */
-/* ----------------------------------------------------------------*/
-static int $5Proc(HWND hDlg, int message, WPARAM wParam, LPARAM lParam)
+/* ---------------------------------------------------------------------------*/
+static int form$6Proc(HWND hDlg, int message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message)
 	{
 		case MSG_INITDIALOG:
 			{
-				Screen.Add(hDlg,"TFrm$6");
+				formInitCtrlLabers(hDlg);
+				formInitCtrlEdits(hDlg);
+				formInitCtrlButtons(hDlg);
 			} break;
 
-		case MSG_KEYBOARD :
-			ProUserKeyBoard(hDlg,wParam);
-			break;
+		case MSG_TIMER:
+			{
 
-		case MSG_ERASEBKGND:
-			if (Bmp_background != NULL)
-				DrawBackground(hDlg, (HDC)wParam, (const RECT*)lParam,Bmp_background);
-			return 0;
-
-		case MSG_CLOSE:
-			DestroyMainWindow (hDlg);
-			MainWindowThreadCleanup (hDlg);
-			return 0;
-
-		case MSG_DESTROY:
-			Screen.Del(hDlg);
-			DestroyAllControls (hDlg);
-			return 0;
+			} break;
 
 		default:
 			break;
 	}
+
+	if (form_base->baseProc(form_base,hDlg, message, wParam, lParam) == 0) {
+		return 0;
+	}
+
     return DefaultDialogProc(hDlg, message, wParam, lParam);
 }
 
-/* ----------------------------------------------------------------*/
+/* ---------------------------------------------------------------------------*/
 /**
- * @brief Create$5Form 创建${7}窗口
+ * @brief createForm$6 创建${7}窗口
  *
  * @param hMainWnd
  *
  * @returns
  */
-/* ----------------------------------------------------------------*/
-int Create${5}Form(HWND hMainWnd,BITMAP *Bmp_bkg)
+/* ---------------------------------------------------------------------------*/
+int createForm$6(HWND hMainWnd,BITMAP *Bmp_bkg)
 {
-	HWND Form = Screen.Find("TFrm${6}");
 	Bmp_background = Bmp_bkg;
 	if(Form) {
 		ShowWindow(Form,SW_SHOWNORMAL);
-		return Form;
 	} else {
-		return CreateMyWindowIndirectParam(&DlgInitParam,hMainWnd,$5Proc,0);
+		form_base_priv.hwnd = hMainWnd;
+		form_base_priv.bmp_bkg = Bmp_bkg;
+		form_base = formBaseCreate(&form_base_priv);
 	}
+
+	return 0;
 }
 ${0}
 endsnippet
