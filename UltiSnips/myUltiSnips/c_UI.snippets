@@ -196,7 +196,7 @@ static int form$6Proc(HWND hDlg, int message, WPARAM wParam, LPARAM lParam)
 /* ---------------------------------------------------------------------------*/
 int createForm$6(HWND hMainWnd,BITMAP *Bmp_bkg)
 {
-	Bmp_background = Bmp_bkg;
+	HWND Form = Screen.Find(form_base_priv.name);
 	if(Form) {
 		ShowWindow(Form,SW_SHOWNORMAL);
 	} else {
