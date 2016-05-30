@@ -1,5 +1,7 @@
 #!/bin/sh
 
+sudo apt-get install vim
+
 ctags --help > /dev/null 2>&1
 if [ ! $? = 0 ] ; then
 	echo "ctags didn't install"
@@ -28,3 +30,4 @@ if [ ! $? = 0 ] ; then
 	sudo apt-get install libtool
 fi
 
+git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
