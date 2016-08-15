@@ -332,7 +332,10 @@ au! BufRead,BufNewFile,BufEnter *.{c,cpp,h,java,javascript} call CSyntaxAfter()
  
 " 忽略.o等文件
 set wildignore+=Makefile        " Linux/MacOSX
-let g:ctrlp_custom_ignore = '\v\.(so|a|la|o|out|in)$'
+set wildignore+=tags        " Linux/MacOSX
+let g:ctrlp_custom_ignore = '\v\.(so|a|la|o|d|out|in)$'
+let g:ctrlp_working_path_mode = 'a'
+
 " -----------------------------------------------------------------------------
 "  < emmet-vim（前身为Zen coding） 插件配置 >
 " -----------------------------------------------------------------------------
