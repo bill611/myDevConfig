@@ -13,3 +13,13 @@ if [ ! $? = 0 ] ; then
 	chsh -s /bin/zsh
 fi
 
+mkdir -p ~/.my_zsh_history
+echo "mv ~/.zshrc ~/.my_zsh_history/zshrc_bak_$TIME"
+mv ~/.zshrc ~/.my_zsh_history/zshrc_bak_$TIME
+echo "cp zshrc ~/.zshrc"
+cp zshrc ~/.zshrc
+mv ~/.oh-my-zsh/themes/ys.zsh-theme ~/.my_zsh_history/ys.zsh-theme_$TIME
+cp ys.zsh-theme ~/.oh-my-zsh/themes
+
+
+
