@@ -1,0 +1,12 @@
+Makefile
+.*
+*.[ado]
+*.swp
+tags
+cscope*
+.ycm_extra_conf.py*
+*.mk
+mk
+out
+update
+
