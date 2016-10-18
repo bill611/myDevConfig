@@ -14,6 +14,3 @@ sudo apt-get install g++ subversion
 sudo apt-get install build-essential
 sudo apt-get install python python-dev
 
-./install_clang.sh
-
-./install_ycm.sh
