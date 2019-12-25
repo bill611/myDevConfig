@@ -9,6 +9,7 @@ if [ ! $? = 0 ] ; then
 	sudo apt-get install zsh
 	echo "install oh-my-zsh"
 	wget --no-check-certificate https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
+	# git clone https://github.com/robbyrussell/oh-my-zsh.git
 	echo "change bash to zsh"
 	chsh -s /bin/zsh
 fi
