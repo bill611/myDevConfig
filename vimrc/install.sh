@@ -22,3 +22,5 @@ if [ -e clean_history.sh ] ; then
 fi
 
 ./install_plugs.sh
+
+cp -r vim/* ~/.vim
